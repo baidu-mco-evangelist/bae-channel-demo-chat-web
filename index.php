@@ -84,6 +84,7 @@ if ($user) {
 				.always(function(data) {
 					createChannel(channel_id, channel_token, access_token);
                   	list();
+                  	getHistory()
 				});
 		}
 		
@@ -97,12 +98,14 @@ if ($user) {
 				for (var i=0; i<messages.length; ++i){
                   //                    alert(messages[i].data);
                     document.getElementById('showMessage').value += messages[i].data+'\n';
+              		document.getElementById('showMessage').scrollTop = document.getElementById('showMessage').scrollHeight;                  
 				}
+
 			});
 
 			Channel.on("error", function(e){
 				var err = e.data;
-				alert("error:" + err);
+              //				alert("error:" + err);
         	});
 		
 			Channel.on("close", function(e){
@@ -120,9 +123,10 @@ if ($user) {
     <script>
       function sendMessage(){
         
-        message = '<?php echo $user['uname']  ?> '+ ": " + document.getElementById('putMessage').value;
+        message = "<?php echo $user['uname']  ?> "+ ": " + document.getElementById('putMessage').value;
         
         var putData = {
+          		'userid': user_id,
                 'message': message,
           		'method': 'pushmesg',
                 'access_token': access_token
@@ -172,6 +176,31 @@ if ($user) {
       }
     </script>
     
+   	<script>
+      function getHistory(){
+        	 var getData = {
+				'channel_id': channel_id,
+				'method': 'getHistory',
+				'user_id': user_id,
+			};
+			$.ajax({
+				url : '/demo/server.php', 
+				data : getData,
+				type : 'post', 
+				dataType : 'json',
+				cache : false
+				}).done(function(data) {
+
+				})
+				.fail(function(data, txt) {
+
+				})
+				.always(function(data) {
+
+				});
+      }
+    </script>
+    
   </head>
   <body>
   <h1><center>
@@ -205,7 +234,7 @@ if ($user) {
     			<td width="150"><textarea name="textarea" cols="23" rows="45" id = 'showUser' readonly="readonly"></textarea></td>
 				<td>   				
 						  <textarea cols="160" rows="35" readonly="readonly" id="showMessage"></textarea>
-						  <textarea cols="160" rows="6" id="putMessage" onkeydown="javascript:if(event.ctrlKey && event.keyCode==13)if(document.getElementById('putMessage').value) sendMessage();else alert('message is null');""></textarea>
+						  <textarea cols="160" rows="6" id="putMessage" onkeydown="javascript:if(event.keyCode==13)if(document.getElementById('putMessage').value) sendMessage();else alert('message is null');""></textarea>
 				          <p>
 						  <input name="start" value="send" type="button" style="width:60px;height:30px;" onClick="sendMessage();">	
 						  </p>
