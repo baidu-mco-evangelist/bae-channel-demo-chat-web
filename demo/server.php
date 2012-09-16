@@ -8,7 +8,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST" ){
   $method = $_GET['method'];
 }
 
-$access_token = '3.68e8b0d5e8dea9be0f432c82203a9427.2592000.1350234799.1529687519-297982'; 
+$access_token = '3.96cf17d8447d5afb68ec6c3485ad64f6.2592000.1350387592.1529687519-372169'; 
 
 $dbname = 'fhIHXTPmiALVAeKgwmLr';
 
@@ -48,7 +48,7 @@ if($method === 'join'){
   
     if($flag == 1){
          mysql_query("insert into chatuser(userid,username,channelid) values('$user_id','$user_name','$channel_id')",$link);
-         echo " insert ok";
+         echo "refreshList";     	
     }
  	
 }
