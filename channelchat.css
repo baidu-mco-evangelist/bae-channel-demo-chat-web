@@ -1,0 +1,65 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{padding:0px; margin:0px;}
+
+body{
+	width:100%;
+}
+
+header{
+	position: relative;
+	top:0px;
+	background-color: #E0E0E0;
+	width:100%;
+	text-align:center;
+	padding-top:4px;
+	padding-bottom:4px;
+}
+
+nav{
+	margin-top:10px;
+}
+
+nav input{
+	margin-left:5%;
+	margin-right:5%;
+	width:80px;
+	height:40px;
+}
+
+.inputMessage{
+	margin-top:10px;
+	margin-left:10%;
+}
+
+#input_message{
+	width:70%;
+	height:40px;
+}
+
+#send_message{
+	width:60px;
+	height:40px;
+}
+
+.showMessage{
+	margin-top:10px;
+	margin-left:10%;
+
+}
+
+#show_messages{
+	width:75%;
+	min-height:300px;
+	overflow-y:auto;
+}
+
+footer{
+	background-color: #E0E0E0;
+	margin-top:10px;
+	width:100%;
+	text-align:center;
+	padding-top:4px;
+	padding-bottom:4px;
+}

@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>channelchatdemo</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<link href="channelchat.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="http://openapi.baidu.com/connect/js/v2.0/featureloader"></script>
+<script type="text/javascript" src="https://channel.api.duapp.com/jssdk/channel.min.js"></script>
+
+</head>
+
+<body>
+
+	<header>
+    	<h1>Channel Chat Demo</h1>
+    </header>
+    
+    <nav>
+    	<input type="button" id="login" value="login"/>
+        <input type="button" id="logout" value="logout"/>
+    </nav>
+    
+    <section class="inputMessage">
+    
+    	<input type="text" id="input_message" />
+ 		<input type="button" id="send_message" disabled="disabled" value="send" onclick="sendMessage();"/> 	
+    </section>
+    
+     <section class="showMessage">	
+     	<textarea id="show_messages" readonly="readonly"> </textarea>
+     </section>
+    
+    
+   <footer>
+    	Copyright &copy; 2012 Baidu Evangelist Team. All Rights Reserved
+    </footer>
+
+</body>
+
+<script type="text/javascript" src="demo/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="demo/channel.js"></script>
+
+</html>

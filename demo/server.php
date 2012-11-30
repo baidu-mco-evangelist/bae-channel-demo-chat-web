@@ -8,7 +8,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST" ){
   $method = $_GET['method'];
 }
 
-$access_token = '3.96cf17d8447d5afb68ec6c3485ad64f6.2592000.1350387592.1529687519-372169'; 
+$access_token = '3.e8613ed65eea2e3c240750d6f538b773.2592000.1356512862.1529687519-373207'; 
 
 $dbname = 'fhIHXTPmiALVAeKgwmLr';
 
@@ -30,23 +30,17 @@ if(!mysql_select_db($dbname,$link)) {
 mysql_query("set names utf8",$link);
 
 if($method === 'join'){
+	
   	$user_id = $_POST['user_id'];
 	$user_name = $_POST['user_name'];
 	$channel_id = $_POST['channel_id'];
-
-  	$flag = 1;
   
-  	$chid =  mysql_query("select channelid from chatuser",$link);
-
-  	while($row = mysql_fetch_assoc($chid) ){
-      
-      if($channel_id == $row['channelid']){
-        $flag = 0;
-        break;
-      }      
-  	} 
-  
-    if($flag == 1){
+    $chid =  mysql_query("select count(*) as count_row from chatuser where channelid='$channel_id'",$link);
+  	
+  	$info= mysql_fetch_array($chid);
+	 
+    if($info[count_row] == 0){
+    
          mysql_query("insert into chatuser(userid,username,channelid) values('$user_id','$user_name','$channel_id')",$link);
          echo "refreshList";     	
     }
@@ -92,7 +86,7 @@ if($method === 'getHistory'){
 }
 
 
-if($method === 'getList'){
+if($method === 'getUserList'){
   
 	$ret =  mysql_query("select distinct username from chatuser ",$link); 
   	$userlist = array();	
@@ -109,6 +103,7 @@ if($method === 'pushmesg'){
   //    $access_token = $_POST["access_token"];
     $info = $_POST['message'];
     $userid = $_POST['userid'];
+	$user_channel_id = $_POST['channel_id'];
   
   	mysql_query("insert into chatMessages(userid,messages) values('$userid','$info')",$link);
   
@@ -121,6 +116,10 @@ if($method === 'pushmesg'){
       //        echo $channel_id ;
       
       	$id = $row['id'];
+		
+		if($user_channel_id == $channel_id){
+			continue;
+		}
       
       	$messages = array($info);
           
